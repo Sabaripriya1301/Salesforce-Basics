@@ -1,0 +1,53 @@
+public class datatype 
+{
+	public static void inttype()
+    {
+        Integer i = 12345;
+        System.debug(i);
+    }
+        
+    public static void longtype()
+    {
+        Long l = 122357656464l;
+        System.debug(l);
+    }
+    
+    public static void doubletype()
+    {
+        Double d = 3.4657;
+        System.debug(d);
+       
+    }
+    
+    public static void Decimaltype()
+    {
+        Decimal de = 2500.89;
+        System.debug(de);
+      
+    }
+    
+    public static void Booltype()
+    {
+       Boolean b1 = True;
+       Boolean b2 = False;
+       System.debug(b1);
+    }
+    public static void strtype()
+    {
+        String s = 'Hello world';
+        System.debug(s);
+    }
+    
+        
+        
+}
+
+
+datatype.inttype();
+datatype.longtype();
+datatype.doubletype();
+datatype.Decimaltype();
+datatype.Booltype();
+datatype.strtype();
+
+
