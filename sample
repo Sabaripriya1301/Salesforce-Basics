@@ -4,3 +4,7 @@ public class sample {
         System.debug('Hello Apex');
     }
 }
+
+
+output:
+Hello Apex
