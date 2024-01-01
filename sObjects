@@ -1,0 +1,12 @@
+public class sobjclass 
+{
+	public static void sobjmethod()
+    {
+        Account acc = new Account(Name='Mobiles');
+        System.debug(acc);
+    }
+    
+}
+
+
+sobjclass.sobjmethod();
