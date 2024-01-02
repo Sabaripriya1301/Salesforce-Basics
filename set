@@ -1,0 +1,18 @@
+public class setclass
+{
+public static void setmethod()
+{
+        Set<String> st= new set<String>{'avc','dcf','hij'};
+		//Set<String> st=new Set<String>();
+		system.debug(st);
+        st.add('wqs');
+        st.add('eds');
+        st.add('mns');
+        system.debug(st.size());
+        system.debug(st);
+        st.clear();
+        system.debug(st);
+}
+}
+
+setclass.setmethod();
