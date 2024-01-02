@@ -1,0 +1,20 @@
+public class listclass 
+{
+    public static void listmethod()
+    {
+        List<integer> lt= new list<integer>{98,67,13,26,46};
+		//List<integer> lt=new list<integer>();
+		system.debug(lt);
+        lt.add(98);
+        lt.add(67);
+        lt.add(45);
+        system.debug(lt.size());
+        system.debug(lt.get(1));
+        lt.sort();
+        system.debug(lt);
+        lt.clear();
+        system.debug(lt);
+    }
+    }
+
+listclass.listmethod();
