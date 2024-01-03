@@ -1,0 +1,9 @@
+list<string> names=new list<string>();
+names.add('abi');
+names.add('naya');
+names.add('sabari');
+names.add('priya');
+system.debug('names' + names);
+for(string abc : names){
+    system.debug(abc);
+}
