@@ -1,0 +1,7 @@
+list<integer> a=new list<integer>{18};
+    if(a[0]>=18){
+        system.debug(' Eligible to Vote');
+    }
+else{
+    system.debug('Not Eligible to vote');
+}
