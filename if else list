@@ -1,0 +1,17 @@
+List<integer> lt=new list<integer>{20,10,30};
+    if(lt[0]==10){
+        system.debug('Ten');
+    }
+if(lt[1]==20){
+    system.debug('twenty');
+}
+if(lt[2]==30){
+    system.debug('tirty');
+}
+else if(lt[1]==20){
+    system.debug('Twenty');
+}
+else{
+    system.debug('Thirty');
+}
+    system.debug(lt);
