@@ -1,0 +1,12 @@
+Set<String> AccNames = new set<String>();
+AccNames.add('LABEL');
+AccNames.add('C CHECK LABEL');
+AccNames.add('CUSTOM LABEL CHECK');
+AccNames.add('test flow account');
+AccNames.add('sForce');
+SYSTEM.debug(AccNames);
+List<Account> accList = [SELECT Id,Name,Phone,Type FROM Account WHERE Name IN: AccNames];
+for(Account a : accList)
+{
+    system.debug(a);
+}
