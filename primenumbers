@@ -1,0 +1,24 @@
+public class PrimeNumberChecker {
+    public static Boolean isPrime(Integer num) {
+        if (num < 1) {
+            return false;
+        }
+        for (Integer i = 2; i <= Math.sqrt(num); i++) {
+            if (math.mod(num,i) == 0) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+}
+List<Integer> numbers = new List<Integer>{1, 2, 3, 4, 5,6,7,8,9,10,11};
+List<Integer> primeNumbers = new List<Integer>();
+
+for(Integer num : numbers){
+    if(PrimeNumberChecker.isPrime(num)){
+        primeNumbers.add(num);
+    }
+}
+
+System.debug('Prime numbers in the list: ' + primeNumbers);
