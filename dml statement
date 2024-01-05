@@ -1,0 +1,83 @@
+public class dmlExample {
+
+    public static void DmlInsert()
+    {
+        Account a = new Account();
+        a.Name = 'DML Account';
+        a.AccountNumber ='123456';
+        insert a;
+    }
+}
+
+
+public class dmlExample {
+
+    public static void DmlInsert()
+    {
+        Account a = new Account(Name ='DML from Apex Code');
+        system.debug('Account Id  before DML--'+ a.Id);
+        insert a;
+        system.debug('Account Id after DML--'+ a.Id);
+    }
+}
+
+
+
+public class dmlExample {
+
+    public static void DmlInsert()
+    {
+        List<Account> accList = new List<Account>();
+        Account a = new Account();
+        a.name ='Account 1 from List';
+        accList.add(a);
+        
+        Account b = new Account();
+        b.name ='Sabari Account ';
+        accList.add(b);
+        
+        system.debug('AccList ==='+ accList[0]);
+        
+        insert accList[1];
+        
+    }
+}
+
+
+
+
+
+public static void DmlUpdate()    
+    {
+		List<Account> updateList = [SELECT Name FROM Account WHERE Name LIKE 'Account from For Loop %'];        
+        for(Account a : updateList)
+        {
+            a.name  = a.name + 'Record ';
+                    
+        }
+        system.debug('updateList--'+updateList);
+        update updateList;
+
+    }
+
+
+
+
+
+public class dmlExample {
+
+    
+    Public static void DmlUpsert()
+    {
+        List<Account> newAccountList = new List<Account>();
+        List<Account> ExAccountList = [SELECT Name FROM Account WHERE Name LIKE 'Account from For Loop %' ];
+        
+        for(Account ac : ExAccountList )
+        {
+            ac.Name = ' Upsert Record ';
+            newAccountList.add(ac);
+        }
+        
+        Account a = new Account();
+        a.Name = 'Upsert Record from Apex';
+        newAccountList.
