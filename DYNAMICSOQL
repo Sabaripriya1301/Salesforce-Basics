@@ -1,0 +1,11 @@
+public class Dynomicclass {
+	public static void dynomicmethod(string objectname, string fieldname)
+    {
+        string s1 = 'Select Id,'+fieldname+' FROM '+objectname;
+        list<sobject> s2 = Database.query(s1);
+        for (sobject s3 : s2)
+        {
+            system.debug(s3);
+        }
+    }
+}
