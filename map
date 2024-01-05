@@ -1,0 +1,27 @@
+public class mclass {
+	public static void mmethod()
+    {
+        Map<integer, string> fruit = new map<integer, string>();
+        fruit.put(1,'apple');
+        fruit.put(2,'banana');
+        fruit.put(3,'berry');
+        fruit.put(4,'mango');
+        system.debug('fruit = ' + fruit);
+         system.debug('get fruit = ' + fruit.get(1));
+        List<String> l = new List<String>();
+        l = fruit.values();
+        system.debug('fruit values = ' + l);
+        Map<Integer,String> o = new Map<Integer,String>();
+        o = fruit.clone();
+		System.debug(o);
+        Boolean result1 = fruit.containsKey(3);
+		System.debug(result1);
+        Boolean result = fruit.isEmpty();
+		System.debug(result);
+        System.debug(fruit.size()); 
+        fruit.remove(4);
+		System.debug(fruit);
+    }
+}
+
+mclass.mmethod();
