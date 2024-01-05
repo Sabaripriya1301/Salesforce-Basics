@@ -16,3 +16,31 @@ public static void setmethod()
 }
 
 setclass.setmethod();
+
+
+public class sclass {
+	public static void smethod()
+{
+    set<string> fruits = new set<string>{'apple','banana','mango'};
+        system.debug('fruits list =' + fruits);
+        fruits.add('papaya');
+    fruits.add('orange');
+    system.debug('add fruits list = ' + fruits);
+    set<string> fr = fruits.clone();
+    system.debug('clone fruits list = ' + fr);
+    boolean result = fruits.contains('mango');
+    list<string> veg = new list<string>{'apple','banana','mango','papaya','orange'};
+        system.debug('veg list =' + veg);
+    fruits.addAll(veg);
+    system.debug('add all fruits list =' + fruits);
+    boolean res =fruits.containsAll(veg);
+    system.debug('containsall fruits list =' + res);
+    system.debug('size fruits list =' + fruits.size());
+    fruits.remove('apple');
+    fruits.clear();
+    system.debug('clear fruits list =' + fruits);
+}
+}
+
+
+sclass.smethod();
