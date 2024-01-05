@@ -1,0 +1,13 @@
+DYNAMIC SOQL
+
+Select Student_name__c, Email_ID__c, College__r.dep__c From Student__c
+
+SELECT name, account.type FROM Opportunity
+
+SELECT Student_name__c, Email_ID__c, College__r.dep__c FROM Student__c
+
+SELECT Student_name__c, Email_ID__c, Department__r.Name FROM Student__c
+
+SELECT id, name,(SELECT id,lastname from Contacts) FROM account
+
+SELECT Name, (SELECT Student_name__c, Email_ID__c from Students__r) from Department__c
