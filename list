@@ -18,3 +18,35 @@ public class listclass
     }
 
 listclass.listmethod();
+public class lclass {
+public static void lmethod()
+{
+    List<integer> slist = new list<integer>{12,243,4546,6767,1};
+        slist.add(98);
+    	slist.add(24);
+    system.debug('add list ' + slist);
+    system.debug('size list ' + slist.size());
+    system.debug('get list ' + slist.get(2));
+    slist.remove(1);
+    system.debug('remove list' + slist);
+    list<integer> rlist = slist.clone();
+    system.debug('clone list ' + rlist);
+    slist.set(1,989499);
+    system.debug('set list ' + slist);
+    slist.sort();
+    system.debug('Sort list' + slist);
+    system.debug('Empty or not ' + slist.isEmpty());
+    slist.clear();
+    system.debug('clear list' + slist);
+}
+}
+
+
+lclass.lmethod();
+
+
+
+
+
+
+
