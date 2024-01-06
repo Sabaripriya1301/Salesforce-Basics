@@ -9,3 +9,16 @@ public class Dynomicclass {
         }
     }
 }
+
+
+Public static void Dmlsoql(String str)
+    {
+         string s1 = 'SELECT Name FROM Account   WHERE Name = \'' + str + '\'';
+       
+        system.debug(s1);
+        list<sObject> s2 = Database.query(s1);
+        for(sObject s3 : s2)
+        {
+            system.debug(s3);
+        }
+    }
