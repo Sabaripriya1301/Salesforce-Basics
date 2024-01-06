@@ -1,0 +1,10 @@
+public class iclass
+{
+    Public static void imethod()
+    {
+       string strname = 'priya';
+           List<student__c> slist = [SELECT Name FROM student__c WHERE Name =: strname];
+           system.debug(slist);
+    }
+
+}
