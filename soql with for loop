@@ -1,0 +1,16 @@
+public class iclass
+{
+    Public static void imethod()
+    {
+       list<Account> acclist = [SELECT Name,NumberofEmployees FROM Account];
+        for (integer i=0; i<acclist.size(); i++)
+        {
+            system.debug(acclist[i].NumberofEmployees);
+        }
+		for (account a : acclist)
+        {
+         	system.debug('Account Name--   ' + a.Name + '  Number of Employees--  ' + a.NumberOfEmployees);   
+        }
+    }
+
+}
