@@ -17,3 +17,7 @@ SELECT Name,Id FROM ACCOUNT
 
 SELECT Name,Id FROM ACCOUNT WHERE Name LIKE 's%'
 
+select Name,email_id__c,college__c from Department__c
+
+
+
