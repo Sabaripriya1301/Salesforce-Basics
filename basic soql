@@ -10,7 +10,6 @@ SELECT Student_name__c, Email_ID__c, Department__r.Name FROM Student__c
 
 SELECT id, name,(SELECT id,lastname from Contacts) FROM account
 
-SELECT Name, (SELECT Student_name__c, Email_ID__c from Students__r) from Department__c
 
 
 SELECT Name,Id FROM ACCOUNT
