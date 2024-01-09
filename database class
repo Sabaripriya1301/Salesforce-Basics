@@ -1,0 +1,18 @@
+public class databaseclass {
+    public static void dbclassmethod(){
+        account ac = new account();
+        ac.Name ='chandran';
+      database.insert(ac);  
+    }
+    
+    public static void dbupdte(){
+      List<account> ac = [select name from account where  name = 'Chandran'];
+        for(account ab : ac){
+            ab.name = ab.name + ' balu';
+            system.debug(ab);
+           
+        }
+        database.update(ac);
+        
+    }
+}
