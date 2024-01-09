@@ -1,0 +1,46 @@
+Trigger AccountTrigger on Account(before insert)
+{
+    system.debug('trigger.new ===' +Trigger.new );
+	System.debug('I am before insert.');
+    for(Account av : Trigger.new)
+    {
+        av.phone = '0987654321';
+        
+    }
+    system.debug('trigger.new after changes ===' +Trigger.new );
+}
+
+
+
+
+
+
+
+
+
+trigger acctrigger on Account (before insert,before update) {
+	system.debug('trigger.new ===' +Trigger.new );
+	System.debug('I am before insert.');
+    for(Account av : Trigger.new)
+    {
+        av.Name = av.Name +'pvt ltd';
+        
+    }
+    system.debug('trigger.new after chang ===' +Trigger.new );
+    
+    
+    system.debug('trigger.new ===' +Trigger.new );
+	System.debug('I am before update.');
+    if(Trigger.isupdate )
+    {
+        
+ 
+    for(Account acc : Trigger.new)
+    {
+ 
+        acc.Website  = 'www.' + acc.Name +'.com';
+        
+    }
+    }
+    system.debug('trigger.new after update ===' +Trigger.new );
+}
