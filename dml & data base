@@ -1,0 +1,184 @@
+DML INSERT
+
+  public class insclass
+{
+	public static void insmeth()
+    {
+        Account bank = New Account();
+        bank.Name = 'HDFC';
+        bank.AccountNumber = '17106048';
+        insert bank;
+        system.debug(bank);
+    }
+}
+
+SELECT name FROM Account WHERE NAME = 'HDFC'
+
+
+  DATABASE INSERT
+
+  public class insclass
+{
+	public static void insmeth()
+    {
+        Account bank = New Account();
+        bank.Name = 'BANK OF BARODA';
+        bank.AccountNumber = '4356345237';
+        Database.insert(bank);
+        system.debug(bank);
+    }
+}
+
+SELECT name FROM Account WHERE NAME = 'BANK OF BARODA'
+
+
+  DML UPDATE
+
+  public class updateclass
+{
+	public static void updatemeth()
+    {
+        List<Account> bank = [SELECT name FROM Account WHERE NAME = 'BANK OF BARODAIndia INDIA'];
+        for (Account updatelist : bank)
+        {
+            updatelist.Name = updatelist.Name = ' INDIA';
+        }
+        system.debug(bank);
+        update bank; 
+    }
+}
+
+SELECT name FROM Account WHERE Name = 'INDIA'
+
+  DATABASE UPDATE
+
+  public class updateclass
+{
+	public static void updatemeth()
+    {
+        List<Account> bank = [SELECT name FROM Account WHERE NAME = 'HDFC'];
+        for (Account updatelist : bank)
+        {
+            updatelist.Name = updatelist.Name = 'BANK OF BARODA';
+        }
+        system.debug(bank);
+        Database.update(bank); 
+    }
+}
+
+SELECT name FROM Account WHERE Name = 'BANK OF BARODA'
+
+  DML UPSERT 
+
+  public class upsertclass
+{
+	public static void upsertmeth()
+    {
+        List<Account> ACC = New List<Account>();
+        List<Account> bank = [SELECT name FROM Account WHERE NAME = 'BANK OF BARODA'];
+        for (Account upsertlist : bank)
+        {
+            upsertlist.Name = 'HDFC';
+            ACC.add(upsertlist);
+        }
+        system.debug(bank);
+        system.debug(ACC);
+        Upsert ACC; 
+        
+        Account a = new Account();
+        a.Name = 'Upsert Record from Apex Class';
+        ACC.add(a);
+    	insert a;
+        system.debug(ACC);
+        
+    }
+}
+
+SELECT name FROM Account WHERE Name = 'Upsert Record from Apex Class'
+
+
+  DATABASE UPSERT
+
+  public class upsertclass
+{
+	public static void upsertmeth()
+    {
+        List<Account> ACC = New List<Account>();
+        List<Account> bank = [SELECT name FROM Account WHERE NAME = 'HDFC'];
+        for (Account upsertlist : bank)
+        {
+            upsertlist.Name = 'IOB';
+            ACC.add(upsertlist);
+        }
+        system.debug(bank);
+        system.debug(ACC);
+        Database.Upsert(ACC); 
+        
+        Account a = new Account();
+        a.Name = 'Database upsert';
+        ACC.add(a);
+    	database.insert(a);
+        system.debug(ACC);
+        
+    }
+}
+
+
+DML DELETE
+
+  public class delclass
+{
+	public static void deltmeth()
+    {
+        List<Account> ac = [SELECT Name FROM Account WHERE Name = 'Upsert Record from Apex Class'];
+        system.debug(ac);
+        delete ac;
+    }
+}
+
+SELECT name FROM Account WHERE Name = 'Upsert Record from Apex Class'
+
+DATABASE DELETE
+
+  public class delclass
+{
+	public static void deltmeth()
+    {
+        List<Account> ac = [SELECT Name FROM Account WHERE Name = 'HDFC'];
+        system.debug(ac);
+        Database.delete(ac);
+    }
+}
+
+SELECT name FROM Account
+
+
+  DML UNDELETE
+
+  public class delclass
+{
+	public static void deltmeth()
+    {
+        List<Account> ac = [select name from account WHERE isDeleted=true ALL ROWS];
+        system.debug(ac);
+        undelete ac;
+        system.debug(ac);
+    }
+}
+
+
+DATABASE UNDELETE
+
+  public class delclass
+{
+	public static void deltmeth()
+    {
+        List<Account> ac = [select name from account WHERE isDeleted=true ALL ROWS];
+        system.debug(ac);
+        Database.undelete(ac);
+        system.debug(ac);
+    }
+}
+
+
+  
