@@ -1,4 +1,4 @@
-DML INSERT
+DML INSERT CODE
 
   public class insclass
 {
@@ -15,7 +15,7 @@ DML INSERT
 SELECT name FROM Account WHERE NAME = 'HDFC'
 
 
-  DATABASE INSERT
+  DATABASE INSERT CODE
 
   public class insclass
 {
@@ -32,7 +32,7 @@ SELECT name FROM Account WHERE NAME = 'HDFC'
 SELECT name FROM Account WHERE NAME = 'BANK OF BARODA'
 
 
-  DML UPDATE
+  DML UPDATE CODE
 
   public class updateclass
 {
