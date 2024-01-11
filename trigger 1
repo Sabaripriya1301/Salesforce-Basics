@@ -1,3 +1,6 @@
+BEFORE INSERT
+
+
 Trigger AccountTrigger on Account(before insert)
 {
     system.debug('trigger.new ===' +Trigger.new );
@@ -16,7 +19,7 @@ Trigger AccountTrigger on Account(before insert)
 
 
 
-
+BEFORE INSERT AND BEFORE UPDATE
 
 trigger acctrigger on Account (before insert,before update) {
 	system.debug('trigger.new ===' +Trigger.new );
