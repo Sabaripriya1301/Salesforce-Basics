@@ -1,0 +1,20 @@
+trigger Opptrigger on Opportunity (after insert) 
+{
+ if(trigger.isAfter && trigger.isInsert)
+ {
+     List <Task> t = new List<Task>();
+     for (Opportunity opp : trigger.new )
+     {
+         if(opp.StageName == 'Closed Won')
+         {
+             Task tk = new Task();
+             tk.Subject = 'Closed won Task';
+             tk.Whatid = opp.Id;
+             tk.Priority = 'Normal';
+             tk.Status = 'Completed';
+             t.add(tk);
+         }
+     }
+     insert t;
+ }
+}
