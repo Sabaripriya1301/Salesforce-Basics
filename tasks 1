@@ -1,0 +1,75 @@
+Whenever a New Account Record is created then needs to create an associated Contact Record automatically.
+
+  trigger bktrigger on Lead (before insert) 
+{
+for (Lead L : Trigger.new)
+    {
+        if(L.LeadSource == 'Web')
+        {
+            L.Rating = 'Cold';
+           
+        }
+        else
+        {
+            L.Rating = 'Hot';
+        }
+    }
+}
+
+Whenever a case is created with origin as email then set status as new and Priority as Medium.
+
+  
+  trigger casetrigger on Case (before insert) 
+{
+    for(Case a : trigger.new)
+    {
+        if(a.Origin == 'Email')
+        {
+            a.Status = 'New';
+            a.Priority ='Medium';
+        }
+        system.debug(a);
+    }
+	
+}
+
+
+
+
+trigger opptrigger on Account (after insert)
+{
+list<opportunity> oc = new list<opportunity>();
+    for(account ac : trigger.new)
+    {
+        opportunity op = new opportunity();
+        op.AccountId= ac.Id;
+        op.Name= ac.Name;
+        op.CloseDate=ac.CreatedDate.date();
+        op.StageName= 'Prospecting';
+        oc.add(op);
+	}
+}
+
+
+Whenever the Account is created with Industry as Banking then create a contact for account, Contact Lastname as Account name and contact phone as account phone.
+
+trigger Contacttrigger on Account (after insert) {
+list<contact> cc = new list<contact>();
+for(account ac : trigger.new)
+{
+    if(ac.Industry == 'Banking'){
+        contact cb = new contact();
+        cb.AccountId = ac.id;
+        cb.LastName= ac.Name;
+        cb.Phone= ac.Phone;
+        cc.add(cb);
+        
+    }
+}
+    insert cc;
+}
+
+
+Whenever Lead is created with LeadSource as Web then give rating as cold otherwise hot.
+
+  
