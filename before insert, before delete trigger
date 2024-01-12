@@ -1,0 +1,45 @@
+trigger ijtrigger on Account (before insert, before delete)
+{
+    if(trigger.isBefore && trigger.isDelete)
+    {
+        for(Account ac : Trigger.new)
+        {
+            if(ac.Industry == 'Banking')
+            {
+                ac.Industry.addError('You can\'t delete this record!');
+            }
+        }
+    }
+
+
+	List<Account> Foods = new List<Account>();
+    for ( Account Hotel : Trigger.new)
+    {
+        if( Hotel.Industry == 'Food & Beverage')
+        {
+            Contact Cons = new Contact();
+            Cons.Name = Hotel.Name;
+            Cons.Phone = Hotel.Phone;
+
+
+
+    system.debug(Trigger.new);
+    if(trigger.isBefore && trigger.isInsert)
+    {
+        for(Account a : Trigger.new)
+        {
+            a.ShippingStreet = a.BillingStreet;
+            a.ShippingCity = a.BillingCity;
+            /*a.BillingState =a.ShippingState;
+            a.BillingPostalCode =a.ShippingPostalCode;*/
+            
+            system.debug(a);
+        }
+    }        
+    
+            
+  }
+    
+    
+    
+    
