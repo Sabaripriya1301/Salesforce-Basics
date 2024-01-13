@@ -18,3 +18,6 @@ trigger Opptrigger on Opportunity (after insert)
      insert t;
  }
 }
+
+
+opportunity & task whatid=opp.id
