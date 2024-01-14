@@ -1,0 +1,45 @@
+1 Account --- Task (Doubt )
+
+if(trigger.isAfter && trigger.isInsert)
+    {
+        List<task> ls = new list<task>();
+        for(Account ac : trigger.new)
+        {
+            if(ac.Type == 'Prospect')
+               {
+                  	Task ts = new Task();
+                  	ts.Subject = 'Account trail task';
+             		ts.Whatid = ac.Id;
+            	 	ts.Priority = 'High';
+             		ts.Status = 'Completed';
+	             	ls.add(ts);
+               }
+            
+            system.debug(ac);
+            
+        }
+        insert ls;
+    }
+
+
+
+trigger Accounttrigger on Account (after insert)
+{
+    system.debug(trigger.new);
+    if(trigger.isAfter && trigger.isInsert)
+    {
+        list<Account> aclist = new list<Account>();
+        list<Contact> conlist = new list<Contact>();
+        for(Account acc : trigger.new)
+        {
+            if(acc.phone != trigger.oldMap.get(acc.id).phone)
+            {
+                aclist.add(acc);
+                system.debug(aclist);
+            }
+        }
+        list<Contact> upcon = [SELECT id,LastName,AccountId FROM Contact WHERE AccountId IN : aclist];
+            update upcon;
+    }
+    
+    }
