@@ -1,0 +1,36 @@
+trigger Accounttrigger on Account (before insert,after insert)
+{
+	//if(trigger.isAfter && trigger.isInsert)
+    //{
+        List<Contact> lc = new list<Contact>();
+        //List<case> ls = new list<case>();
+        for(Account ac : trigger.new)
+        {
+            if(ac.Type == 'Prospect')
+            {
+              Contact tc = new Contact();
+              tc.LastName = ac.Name;
+              	tc.Phone =ac.Phone;
+                tc.AccountId = ac.Id;
+                lc.add(tc);
+            }
+           /* else 
+            {
+                if(ac.Industry == 'Banking')
+                {
+                  	Case ts = new Case();
+                  	ts.Origin = 'Email'; 
+             		ts.Status = 'Working';
+                	ts.SourceId = ac.Id;
+	             	ls.add(ts);
+                }
+            }*/
+            
+            
+            system.debug(ac);
+            
+        }
+        //insert ls;
+        insert lc;
+    //}
+    
