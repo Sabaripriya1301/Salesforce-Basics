@@ -1,0 +1,13 @@
+trigger Opptrigger on Opportunity (/*after insert*/ before update) 
+{
+    if(trigger.isBefore && trigger.isUpdate)
+    {
+        for(Opportunity op : trigger.new)
+        {
+            if(op.StageName == 'Closed Won')
+            {
+                op.CloseDate = system.Today();
+                op.Type = 'New Customer';
+                
+            }
+        }
