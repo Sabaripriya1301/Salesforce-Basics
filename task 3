@@ -1,0 +1,13 @@
+trigger Leadtrigger on Lead (before insert, before update, after insert, after update) 
+{
+    if(trigger.isBefore && trigger.isInsert && trigger.isUpdate && trigger.isAfter && trigger.isInsert && trigger.isUpdate)
+    {
+        list<lead> lp = [SELECT Email FROM lead];
+        for(Lead ld : trigger.new)
+        {
+            if( trigger.new == lp)
+            {
+                ld.Email.addError('Duplicate Email Please enter another Email');
+            }
+        }
+    }
