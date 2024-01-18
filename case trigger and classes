@@ -1,0 +1,71 @@
+TRIGGER CODE
+
+
+trigger CaseTrigger on Case (before insert,before update,after Insert)
+{
+            if(Trigger.isBefore)//true
+            {    system.debug('Trigger.isBefore --'+Trigger.isBefore);
+             
+                If(Trigger.isInsert) //false
+                {
+                       system.debug('Trigger.isInsert --'+Trigger.isInsert); 
+                    caseHandler.beforeInsertMethod(Trigger.new); /// Datatype --- List
+                }
+              If(Trigger.isUpdate) //true
+                { 
+                    system.debug('Trigger.isUpdate --'+Trigger.isUpdate); 
+                    caseHandler.beforeUpdateMethod(Trigger.new); 
+                }
+            }
+             if(Trigger.isAfter)
+             {system.debug('Trigger.isAfter --'+Trigger.isAfter);
+                 if(Trigger.isInsert)
+                 {
+                     caseHandler.afterInsertMethod(Trigger.new);
+                 }
+                 
+                     
+             }
+
+}
+
+
+CASE CLASS
+
+
+public class caseHandler {
+    
+            
+            public static void beforeInsertMethod(List<Case> cc) 
+            {
+                   system.debug('trigger.new ----'+  cc);
+                    for(Case con : cc)
+                    {
+                        con.Origin = 'Phone';
+                    }
+   
+            }
+            public static void beforeUpdateMethod(List<case> cc)
+            {
+                for(Case c : cc)
+                {
+                    c.Priority = 'High';
+                }
+            }
+            public static void afterInsertMethod(List<case> cc)
+            {    
+                List<Task>tk = new List<Task>();
+             
+                for(Case c : cc)
+                {
+                    Task t  = new Task();
+                    t.Subject = 'Test Task From After Insert Trigger';
+                    t.Status ='Completed';
+                    t.WhatId = c.Id;
+                    tk.add(t);
+                }
+                
+                insert tk;
+            }
+        
+}
