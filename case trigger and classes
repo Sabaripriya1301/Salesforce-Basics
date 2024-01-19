@@ -1,4 +1,4 @@
-TRIGGER CODE
+TRIGGER CODE FOR CASE USING CLASS AND METHOD
 
 
 trigger CaseTrigger on Case (before insert,before update,after Insert)
