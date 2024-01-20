@@ -1,3 +1,6 @@
+
+INTIGER
+
 public class datatype 
 {
 	public static void inttype()
@@ -25,13 +28,23 @@ public class datatype
         System.debug(de);
       
     }
-    
+
+
+BOOLEAN
+
+
+
     public static void Booltype()
     {
        Boolean b1 = True;
        Boolean b2 = False;
        System.debug(b1);
     }
+
+
+STRING
+
+
     public static void strtype()
     {
         String s = 'Hello world';
