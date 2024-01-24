@@ -1,3 +1,5 @@
+DML
+
 public class Dynomicclass {
 	public static void dynomicmethod(string objectname, string fieldname)
     {
@@ -22,3 +24,5 @@ Public static void Dmlsoql(String str)
             system.debug(s3);
         }
     }
+
+
