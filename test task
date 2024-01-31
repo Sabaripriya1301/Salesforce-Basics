@@ -1,0 +1,245 @@
+TRIGGER CODE
+
+trigger Accounttrigger on Account (before insert,before update,after update,after insert)
+{
+    if(Trigger.isBefore)
+    { 
+        If(Trigger.isInsert) 
+        {
+            accountHandler.beforeInsertMethod(Trigger.new);       
+        }
+        Else if(Trigger.isUpdate)   
+        {           
+             accountHandler.beforeUpdateMethod(Trigger.new);
+        }
+        Else if(Trigger.isDelete)  
+        {
+            system.debug(Trigger.isDelete + '            '+Trigger.old);
+          accountHandler.beforeDeleteMethod(Trigger.old);   
+        } 
+    }
+    Else if(Trigger.isAfter) 
+    {
+        If(Trigger.isInsert)            
+        {
+            accountHandler.afterInsertMethod(Trigger.new);      
+        }
+        
+        Else if(Trigger.isUpdate)
+        {
+            accountHandler.afterUpdateMethod(Trigger.new);            
+        }
+        Else if(Trigger.isDelete)
+        {
+           accountHandler.afterDeleteMethod(Trigger.new);  
+        }
+        Else if(Trigger.isUndelete) 
+        {
+            
+            // write the code for after undelete  
+        }  
+    }
+    }
+___________________________________________________________________________________________
+
+
+ACCOUNT HANDLER
+
+
+public class accountHandler 
+{ 
+    public static void beforeInsertMethod(List<Account>ac)
+    {
+        for(Account a : ac)
+        {
+            a.Description =a.Name + ' Senior Salesforce Developer';
+            system.debug('beforeInsertMethod');
+        }
+          system.debug('After Insert =='+ac);
+    }
+     public static void beforeUpdateMethod(List<Account>ac)
+    {
+         for(Account a : ac)
+        { 
+            if(a.Type == 'Prospect')
+            {
+                a.Sic = '101';
+            }
+        }
+    }
+    
+     public static void beforeDeleteMethod(List<Account>ac)
+    {
+        for(Account a : ac)
+        {
+                if(a.rating == 'Hot')
+                {
+                   a.Rating.addError('Unable to delete Rating Hot Record');
+                }    
+        }
+    }
+    public static void afterInsertMethod(List<Account>ac)
+    {
+        for(Account a : ac)
+        { 
+            if(a.Industry == 'Banking')
+            {
+               Contact con = new Contact();
+                con.LastName = a.Name ;
+                con.Phone = a.Phone;
+                con.Id = a.Id;
+            }
+        }
+    }
+    public static void afterUpdateMethod(List<Account>ac)
+    {
+        for(Account a : ac)
+        { 
+            if(a.Industry == 'Banking')
+            {
+                a.rating ='Hot';
+            }
+        } 
+    }
+    
+     public static void afterDeleteMethod(List<Account>ac)
+    {
+        for(Account a : ac)
+        {
+                if(a.Industry == 'Banking')
+                {
+                   a.Rating.addError('Unable to delete Industry banking Record');
+                }    
+        }
+    }
+    
+}
+________________________________________________________________________________________________
+
+TEST HANDLER
+
+
+@isTest
+public class accountHandlerTest 
+{    
+    @isTest
+  public  static void testBeforeInsertMethod()
+  {
+          List<Account> testAccounts = new List<Account>();
+          Account a = new Account();
+          a.Name = 'Captain Miller';
+          testAccounts.add(a);
+      
+          testAccounts.add(new Account(Name = 'A2B Account'));
+      
+          insert testAccounts;
+ 
+        System.assertEquals('Captain Miller', testAccounts[0].Name);
+        System.assertEquals('A2B Account', testAccounts[1].Name);
+    }
+    
+     @isTest
+  		public  static void testbeforeUpdateMethod()
+  {
+      List<Account> testAccounts = new List<Account>();
+          Account a = new Account();
+          a.Name = 'Captain Miller';
+          a.Type ='Other';
+          testAccounts.add(a);
+      
+          testAccounts.add(new Account(Name = 'A2B Account', Type ='Other'));
+      
+          insert testAccounts;
+      
+          List<Account> updatedata = [select Id,Name,Sic,Type FROM Account WHERE Type = 'Other'];
+          system.debug('updatedata=='+updatedata);
+          For(Account ac :testAccounts)
+          {
+              ac.Name =ac.Name + 'Updated';
+    
+          }
+            update testAccounts;
+    
+          //System.assertEquals('101', updatedata[0].Sic);
+          //System.assertEquals('101', updatedata[1].Sic);
+    }
+    
+       @isTest
+  		public  static void testbeforeDeleteMethod()
+        {
+          List<Account> testAccounts = new List<Account>();
+          Account a = new Account();
+          a.Name = 'Captain Miller';
+          a.Rating ='Hot';
+          testAccounts.add(a);
+      
+          testAccounts.add(new Account(Name = 'A2B Account', Rating ='Hot'));
+      
+          insert testAccounts;
+            
+          List<Account> Deletedata = [select Id,Name,Sic,Type FROM Account WHERE Rating = 'Hot'];
+          system.debug('Deletedata=='+Deletedata);
+            For(Account ac :testAccounts)
+          {
+              ac.Name =ac.Name + ' New ';
+          }
+            
+          Delete testAccounts;
+        }
+    @isTest
+  		public  static void testafterInsertMethod()
+        {
+            List<Account> testAccounts = new List<Account>();
+            Account a = new Account();
+            a.Name = 'IOB Account';
+            a.Industry = 'Banking';
+            a.Phone = '9876543234';
+            testAccounts.add(a);
+      
+          testAccounts.add(new Account(Name = 'HDFC Account', Industry = 'Banking',Phone = '9876543234'));
+      
+          insert testAccounts;
+            
+          //List<Account> afterinsertData = [SELECT Id,Name,Phone,Industry FROM Account WHERE Industry = 'Banking'];
+        }
+     @isTest
+  		public  static void testafterUpdateMethod()
+        {
+            List<Account> testAccounts = new List<Account>();
+            Account a = new Account();
+            a.Name = 'IOB Account';
+            a.Industry = 'Banking';
+            a.Phone = '9876543234';
+            testAccounts.add(a);
+      
+          testAccounts.add(new Account(Name = 'HDFC Account', Industry = 'Banking',Phone = '9876543234'));
+      
+          insert testAccounts;
+            
+          List<Account> afterinsertData = [SELECT Id,Name,Phone,Industry FROM Account WHERE Industry = 'Banking'];
+            for(Account ac : testAccounts)
+            {
+                ac.Rating = 'Hot';
+            }
+            update testAccounts;
+        }
+   	
+    
+     @isTest
+  		public  static void testafterDeleteMethod()
+        {
+          List<Account> testAccounts = new List<Account>();
+            Account a = new Account();
+            a.Name = 'IOB Account';
+            a.Industry = 'Banking';
+            testAccounts.add(a);
+      
+          testAccounts.add(new Account(Name = 'HDFC Account', Industry = 'Banking'));
+      
+          insert testAccounts;
+            
+          List<Account> afterinsertData = [SELECT Id,Name,Phone,Industry FROM Account WHERE Industry = 'Banking'];
+            
+          Delete testAccounts;
+        }
+}
