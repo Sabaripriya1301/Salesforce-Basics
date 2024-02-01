@@ -17,3 +17,25 @@ trigger contactstrigger on Contact (before insert)
         }insert tk;
     }
 }
+
+
+trigger contactstrigger on Contact (before insert) 
+{
+    List<task> tk = new list<task>();
+	if(trigger.isBefore && trigger.isInsert)
+    {
+        for(contact con : trigger.new)
+        {
+            if(con.LeadSource == 'Web')
+            {
+                task ta = new task();
+                ta.Subject = 'Contact trail';
+                ta.Priority = 'High';
+                ta.Status = 'In Progress';
+                ta.WhatId = con.Id;
+                tk.add(ta);
+            }
+        }insert tk;
+    }
+}
+
