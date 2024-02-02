@@ -1,0 +1,53 @@
+public class CaseReasonBatchApex implements Database.Batchable<Sobject>
+{
+    public Database.QueryLocator Start(Database.BatchableContext bc)
+    {
+        return Database.getQueryLocator('SELECT Id,CaseNumber,Status FROM Case');
+    }
+    public void Execute (Database.BatchableContext bc, list<case> Caselist)
+    {
+        for(case cs : Caselist)
+        {
+            system.debug(Caselist);
+            
+            if(cs.Status == 'Closed')
+            {
+                cs.Closed_Reason__c =  'batch class update';
+            }
+            update Caselist;
+        }
+    }
+    public void finish(Database.BatchableContext bc)
+    {
+        system.debug('Case reason updated');
+    }
+}
+
+
+___________________________________________________________________________________________
+
+public class Batchapextask implements Database.Batchable<Sobject>
+{
+	public Database.QueryLocator start(Database.BatchableContext bc)
+    {
+        return Database.getQueryLocator('SELECT Id,StageName FROM Opportunity');
+    }
+    public void execute(Database.BatchableContext bc, list<Opportunity> Blist)
+    {
+        for(Opportunity opp : Blist)
+        {
+            system.debug(Blist);
+            if(opp.StageName == 'Prospecting')
+            {
+                Date dt = Date.today();
+                //dt.addDays(7);
+                opp.Description =' Date --'+ dt.addDays(7);
+            }
+        }
+        update Blist;
+    }
+    public void finish(Database.BatchableContext bc)
+    {
+        system.debug('opportunity update completed');
+    }
+}
