@@ -1,0 +1,23 @@
+public class todaytask 
+{
+	public todaytask()
+    {
+        takeshower();
+        haveLunch();
+        carService();
+    }
+        public static void takeshower()
+        {
+            system.debug('I am taking shower');
+        }
+        public static void haveLunch()
+        {
+            system.debug('i am having my lunch');
+        }
+    @future
+        public static void carService()
+        {
+            system.debug('car is being repaied');
+        }
+    
+}
