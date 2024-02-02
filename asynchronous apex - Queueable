@@ -1,0 +1,50 @@
+public class FirstQueueable implements Queueable
+{
+	public void execute(QueueableContext qcon)
+    {
+        Delete[SELECT id FROM Account WHERE Createddate = Last_Month];
+        
+        system.enqueuejob(new SecndQueueable());
+    }
+}
+
+
+public class SecndQueueable implements Queueable
+{
+	public void execute(QueueableContext qcon)
+    {
+        Delete[SELECT id FROM Contact WHERE Createddate = Last_Month];
+    }
+}
+
+
+public class ContactCreationQueueable implements Queueable
+{
+    private list<Account> AcclisttocreateContact;
+    
+    public ContactCreationQueueable(list<Account> ExecutingAccountfromTriggr)
+    {
+        this.AcclisttocreateContact = ExecutingAccountfromTriggr;
+    }
+	public void execute(QueueableContext qcon)
+    {
+        list<Contact> conlist = new list<Contact>();
+        for(account acc : AcclisttocreateContact)
+        {
+            Contact con = new contact();
+            con.LastName = acc.Name;
+            con.AccountId = acc.Id;
+            conlist.add(con);
+        }
+    }
+}
+
+
+
+trigger AccountTriggerforContact on Account (after insert)
+{
+	if(trigger.isAfter && trigger.isInsert)
+    {
+        system.enqueuejob(new ContactCreationQueueable(trigger.new));
+    }
+}
