@@ -1,0 +1,41 @@
+METHOD 1 Fetch all information
+
+@RESTResource (urlMapping='/v1/studentinformation/')
+
+global class restwebserviceTest 
+{
+	@httpGet
+    
+    global static list<student__c> getRest()
+    {
+        list<student__c> st = new list<student__c>();
+        //Map<string,string> stparams = RestContext.request.params;
+        //string studentid = stparams.get('id');
+       st=[SELECT Name,student_id__c,class__c FROM student__c];
+        return st;
+    }
+}
+
+URL : /services/apexrest/v1/studentinformation/
+_______________________________________________________________________
+
+METHOD 2 Fetch particulor Id 
+
+@RESTResource (urlMapping='/v1/studentinformation/')
+
+global class restwebserviceTest 
+{
+	@httpGet
+    
+    global static list<student__c> getRest()
+    {
+        list<student__c> st = new list<student__c>();
+        Map<string,string> stparams = RestContext.request.params;
+        string studentid = stparams.get('id');
+       st=[SELECT Name,student_id__c,class__c FROM student__c WHERE Id=:studentid];
+        return st;
+    }
+}
+
+
+URL : /services/apexrest/v1/studentinformation/?id=a025h00000tUkMtAAK
