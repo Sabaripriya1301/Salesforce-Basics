@@ -1,0 +1,27 @@
+@RESTResource (urlMapping='/v1/studentinformation/')
+
+global class restwebserviceTest 
+{
+	@httpPost
+    
+    global static student__c postRest(string name,String stid,string stclass)
+    {
+        student__c st = new student__c();
+        st.Name = name;
+        st.student_id__c = stid;
+        st.class__c = stclass;
+ 
+        insert st;
+        return st;
+    }
+}
+
+
+URL : /services/apexrest/v1/studentinformation/
+
+
+REQUEST BODY JSON :
+
+{
+"name" : "Shab" , "stid" : "0007" , "stclass" : "A"
+}
