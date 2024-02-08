@@ -1,0 +1,19 @@
+@RESTResource (urlMapping='/v1/studentinformation/')
+
+global class restwebserviceTest 
+{
+	@httpDelete
+    
+    global static String DeleteRest()
+    {
+        list<student__c> st = new list<student__c>();
+        Map<string,string> stparams = RestContext.request.params;
+        string studentid = stparams.get('id');
+       st=[SELECT Name,student_id__c,class__c FROM student__c WHERE Id=:studentid];
+        Delete st;
+        return 'Record deleted';
+    }
+}
+
+URL : /services/apexrest/v1/studentinformation/?id=a025h00000tUkRvAAK
+
