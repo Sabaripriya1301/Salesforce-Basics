@@ -1,0 +1,20 @@
+opportunity op = new opportunity();
+op.name = 'my opportunity';
+op.Amount = 1000;
+op.StageName = 'prospecting';
+op.CloseDate = date.Today()+7;
+insert op;
+system.debug(op);
+
+account ac = new account();
+ac.name = op.Name;
+insert ac;
+
+list<opportunity> opps = [SELECT Name FROM Opportunity WHERE Name = 'my opportunity'];
+list<Account> acc = [SELECT Name,Id FROM Account WHERE Name ='my opportunity'];
+for(opportunity ops : opps)
+{
+ops.AccountId = acc[0].Id;
+}
+
+update opps;
