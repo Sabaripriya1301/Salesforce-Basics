@@ -1,0 +1,24 @@
+@RESTResource (urlMapping='/v1/studentinformation/')
+
+global class restwebserviceTest 
+{
+	@httpPut
+    
+    global static student__c puttRest(string stclass)
+    {
+        Map<string,string> stparams = RestContext.request.params;
+        string studentid = stparams.get('id');
+        student__c st= new student__c(class__c = stclass,id = studentid );
+        Update st;
+        return st;
+    }
+}
+
+
+URL : /services/apexrest/v1/studentinformation/?id=a025h00000w90cOAAQ
+
+REQUEST BODY JSON :
+
+{
+"stclass" : "First class"
+}
