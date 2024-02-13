@@ -1,3 +1,5 @@
+4 th task
+
 public class accountHandler 
 { 
     public static void afterInsertUpdateMethod(List<Account>Acc)
@@ -22,3 +24,24 @@ public class accountHandler
         accountHandler.afterInsertUpdateMethod(trigger.new);
         system.debug(trigger.new);
     }
+
+
+1st task
+
+trigger moblileDiscriptionTrigger on Mobile__c (after insert)
+{
+	if(trigger.isAfter && trigger.isInsert)
+    {
+        List<Device__c> dlist = new list<Device__c>();
+        for(Mobile__c mob : trigger.new)
+        {
+            Device__c dev = new Device__c();
+            dev.Name = mob.Name;
+            dev.Discription__c = mob.Discription__c;
+            dlist.add(dev);
+        }
+        insert dlist;
+    }
+}
+
+
