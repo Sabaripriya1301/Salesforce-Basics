@@ -1,4 +1,5 @@
 4 th task
+__________
 
 public class accountHandler 
 { 
@@ -27,6 +28,7 @@ public class accountHandler
 
 
 1st task
+________
 
 trigger moblileDiscriptionTrigger on Mobile__c (after insert)
 {
@@ -44,4 +46,28 @@ trigger moblileDiscriptionTrigger on Mobile__c (after insert)
     }
 }
 
+3rd task
+________
 
+trigger Opptrigger on Opportunity (after update) 
+{
+    if(trigger.isAfter && trigger.isUpdate)
+    {
+        list<Task> tl = new List<Task>();
+        for(Opportunity op : Trigger.new)
+        {
+            if(op.StageName == 'Closed Won')
+            {
+                task tk = new task();
+                tk.Subject = 'Followup task'+op.Name;
+                tk.Priority = 'High';
+                tk.Status ='In Progress';
+                tl.add(tk);
+            }
+        }
+        insert tl;
+    }
+    
+    
+    
+    
