@@ -1,0 +1,24 @@
+public class accountHandler 
+{ 
+    public static void afterInsertUpdateMethod(List<Account>Acc)
+    {
+        list<Opportunity> oplist = [SELECT Name,StageName,Id FROM Opportunity];
+        list<Opportunity> updatedOpp = new List<Opportunity>();
+        for(Account a : Acc)
+        {
+            if(a.Close_All_Opps__c == 'True')
+            {
+                oplist.StageName = 'Closed Won';
+            }
+        }
+        update updatedOpp;
+    }
+
+
+    trigger Accounttrigger on Account (before insert,before update,after update,after insert)
+{
+	if(trigger.isAfter && trigger.isInsert && trigger.isUpdate)
+    {
+        accountHandler.afterInsertUpdateMethod(trigger.new);
+        system.debug(trigger.new);
+    }
