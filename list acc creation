@@ -1,0 +1,35 @@
+public class practiceClass 
+{
+	public static void practiceClassMethod()
+    {
+		list<gym__c> gm = new list<gym__c>();
+		system.debug(gm);
+		gym__c gyms = new gym__c();
+		gyms.Brach__c = 'Chennai';
+		gyms.Gym_Fees__c = 17000;
+		gyms.Discount__c = 5;
+		gyms.Name = 'f and F';
+		gyms.Nutrisan__c = 'Wegih gain';
+        gm.add(gyms);
+        
+        insert gm;
+        
+        list<Account> acclist = new list<Account>();
+        for(gym__c mygym : gm)
+        {
+            if(mygym.Brach__c == 'Chennai')
+            {
+                Account ac = new account();
+                ac.Name = mygym.Name;
+                acclist.add(ac);
+                
+            }
+        }
+        insert acclist;
+        
+        system.debug(acclist);
+        system.debug(gm);
+        
+    }
+}
+
